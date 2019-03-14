@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -44,6 +45,31 @@ public class HitDelay implements Listener, CommandExecutor {
 					}
 					if (effect.getAmplifier() == 4) {
 						player.setMaximumNoDamageTicks(Main.getPL().getConfig().getInt("Amp4"));
+					}
+				}
+			}
+		}
+	}
+	@EventHandler
+	public void lavaDamage(final EntityDamageEvent event) {
+		Entity e = event.getEntity();
+		if (e instanceof Player) {
+			Player player = (Player) e;
+			if (!player.hasPotionEffect(PotionEffectType.REGENERATION)) {
+				player.setMaximumNoDamageTicks(20);
+				Collection<PotionEffect> pe = player.getActivePotionEffects();
+				for (PotionEffect effect : pe) {
+					if (effect.getType().equals(PotionEffectType.REGENERATION)) {
+						player.setMaximumNoDamageTicks(Main.getPL().getConfig().getInt("Amp1"));
+						if (effect.getAmplifier() == 2) {
+							player.setMaximumNoDamageTicks(Main.getPL().getConfig().getInt("Amp2"));
+						}
+						if (effect.getAmplifier() == 3) {
+							player.setMaximumNoDamageTicks(Main.getPL().getConfig().getInt("Amp3"));
+						}
+						if (effect.getAmplifier() == 4) {
+							player.setMaximumNoDamageTicks(Main.getPL().getConfig().getInt("Amp4"));
+						}
 					}
 				}
 			}

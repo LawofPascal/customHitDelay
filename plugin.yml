@@ -1,7 +1,7 @@
 name: UltimatecraftHitDelay
 description: Plugin designed to slightly nerf the regeneration players are given on Ultimatecraft by decreasing damage tick.
 author: LawofPascal
-version: 1.1
+version: 1.2
 main: io.github.LawofPascal.customhitdelay.Main 
 commands:
   uchd: 
